@@ -82,8 +82,10 @@ function clear() {
 function drawShaded() {
     const blocks = document.querySelectorAll('.block');
     blocks.forEach((block) => {
+        let opacity = 0.2;
         block.addEventListener('mouseover', () => {
-            block.setAttribute('style',`background-color: rgb(initial,initial,initial);`);
+        block.setAttribute('style',`background-color: rgb(0, 0, 0, ${opacity});`);
+        opacity += 0.1;
         });
     });
 }
