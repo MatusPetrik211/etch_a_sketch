@@ -20,9 +20,30 @@ function createCanvas(size) {
     }
 }
 
+createCanvas(16);
+drawBlack();
 
+const clearButton = document.querySelector('.clear');
+clearButton.addEventListener('click', () => {
+    clear();
+})
 
-createCanvas(3);
+function clear() {
+    const blocks = document.querySelectorAll('.block');
+    blocks.forEach((block) => {
+        block.setAttribute('style','background-color: white;');
+    });
+}
+
+function drawBlack() {
+    const blocks = document.querySelectorAll('.block');
+    blocks.forEach((block) => {
+        block.addEventListener('mouseover', () => {
+            block.setAttribute('style','background-color: black;');
+        });
+    });
+}
+
 
 
 

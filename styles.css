@@ -20,8 +20,8 @@ body {
 
 .buttons {
     display: flex;
-    justify-content: space-between;
-    width: 500px;
+    justify-content:space-between;
+    width: 600px;
 }
 
 button {
