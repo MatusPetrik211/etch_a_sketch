@@ -1,3 +1,4 @@
+// Function for setting the canvas size in blocks
 function createCanvas(size) {
     const container = document.querySelector('.container');
 
@@ -23,17 +24,30 @@ function createCanvas(size) {
 createCanvas(16);
 drawBlack();
 
+const sizeButton = document.querySelector('.change-size');
+sizeButton.addEventListener('click', () => {
+    getSize();
+});
+
 const clearButton = document.querySelector('.clear');
 clearButton.addEventListener('click', () => {
     clear();
-})
+});
 
-function clear() {
-    const blocks = document.querySelectorAll('.block');
-    blocks.forEach((block) => {
-        block.setAttribute('style','background-color: white;');
-    });
-}
+const blackButton = document.querySelector('.black');
+blackButton.addEventListener('click', () => {
+    drawBlack();
+});
+
+const randomButton = document.querySelector('.random');
+randomButton.addEventListener('click', () => {
+    drawRandom();
+});
+
+const shadeButton = document.querySelector('.shading');
+shadeButton.addEventListener('click', () => {
+    drawShaded();
+})
 
 function drawBlack() {
     const blocks = document.querySelectorAll('.block');
@@ -43,6 +57,49 @@ function drawBlack() {
         });
     });
 }
+
+function getSize() {
+    const size = window.prompt('Enter the size of canvas: (maximum is 100)');
+    if(size > 100 || 0 > size || isNaN(size)) {
+        window.alert('Enter a valid size');
+    }
+    else {
+        const columns = document.querySelectorAll('.column');   
+        columns.forEach((column) => {
+            column.remove();
+        })
+        createCanvas(size); 
+    }
+}
+
+function clear() {
+    const blocks = document.querySelectorAll('.block');
+    blocks.forEach((block) => {
+        block.setAttribute('style','background-color: white;');
+    });
+}
+
+function drawShaded() {
+    const blocks = document.querySelectorAll('.block');
+    blocks.forEach((block) => {
+        block.addEventListener('mouseover', () => {
+            block.setAttribute('style',`background-color: rgb(initial,initial,initial);`);
+        });
+    });
+}
+
+function drawRandom() {
+    const blocks = document.querySelectorAll('.block');
+    blocks.forEach((block) => {
+        block.addEventListener('mouseover', () => {
+            const randomRed = Math.floor(Math.random() * 255);
+            const randomGreen = Math.floor(Math.random() * 255);
+            const randomBlue =  Math.floor(Math.random() * 255);
+            block.setAttribute('style',`background-color: rgb(${randomRed},${randomGreen},${randomBlue})`);
+        });
+    });
+}
+
 
 
 
