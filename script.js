@@ -21,6 +21,59 @@ function createCanvas(size) {
     }
 }
 
+function getSize() {
+    const size = window.prompt('Enter the size of canvas: (maximum is 100)');
+    if(size > 100 || 0 > size || isNaN(size)) {
+        window.alert('Enter a valid size');
+    }
+    else {
+        const columns = document.querySelectorAll('.column');   
+        columns.forEach((column) => {
+            column.remove();
+        })
+        createCanvas(size); 
+    }
+}
+
+function clear() {
+    const blocks = document.querySelectorAll('.block');
+    blocks.forEach((block) => {
+        block.setAttribute('style','background-color: white;');
+    });
+}
+
+function drawBlack() {
+    const blocks = document.querySelectorAll('.block');
+    blocks.forEach((block) => {
+        block.addEventListener('mouseover', () => {
+            block.setAttribute('style','background-color: black;');
+        });
+    });
+}
+
+function drawShaded() {
+    const blocks = document.querySelectorAll('.block');
+    blocks.forEach((block) => {
+        let opacity = 0.2;
+        block.addEventListener('mouseover', () => {
+        block.setAttribute('style',`background-color: rgb(0, 0, 0, ${opacity});`);
+        opacity += 0.1;
+        });
+    });
+}
+
+function drawRandom() {
+    const blocks = document.querySelectorAll('.block');
+    blocks.forEach((block) => {
+        block.addEventListener('mouseover', () => {
+            const randomRed = Math.floor(Math.random() * 255);
+            const randomGreen = Math.floor(Math.random() * 255);
+            const randomBlue =  Math.floor(Math.random() * 255);
+            block.setAttribute('style',`background-color: rgb(${randomRed},${randomGreen},${randomBlue})`);
+        });
+    });
+}
+
 createCanvas(16);
 drawBlack();
 
@@ -49,55 +102,3 @@ shadeButton.addEventListener('click', () => {
     drawShaded();
 })
 
-function drawBlack() {
-    const blocks = document.querySelectorAll('.block');
-    blocks.forEach((block) => {
-        block.addEventListener('mouseover', () => {
-            block.setAttribute('style','background-color: black;');
-        });
-    });
-}
-
-function getSize() {
-    const size = window.prompt('Enter the size of canvas: (maximum is 100)');
-    if(size > 100 || 0 > size || isNaN(size)) {
-        window.alert('Enter a valid size');
-    }
-    else {
-        const columns = document.querySelectorAll('.column');   
-        columns.forEach((column) => {
-            column.remove();
-        })
-        createCanvas(size); 
-    }
-}
-
-function clear() {
-    const blocks = document.querySelectorAll('.block');
-    blocks.forEach((block) => {
-        block.setAttribute('style','background-color: white;');
-    });
-}
-
-function drawShaded() {
-    const blocks = document.querySelectorAll('.block');
-    blocks.forEach((block) => {
-        let opacity = 0.2;
-        block.addEventListener('mouseover', () => {
-        block.setAttribute('style',`background-color: rgb(0, 0, 0, ${opacity});`);
-        opacity += 0.1;
-        });
-    });
-}
-
-function drawRandom() {
-    const blocks = document.querySelectorAll('.block');
-    blocks.forEach((block) => {
-        block.addEventListener('mouseover', () => {
-            const randomRed = Math.floor(Math.random() * 255);
-            const randomGreen = Math.floor(Math.random() * 255);
-            const randomBlue =  Math.floor(Math.random() * 255);
-            block.setAttribute('style',`background-color: rgb(${randomRed},${randomGreen},${randomBlue})`);
-        });
-    });
-}
